@@ -1,0 +1,306 @@
+
+Without mappedBy
+CategoryEntity.java
+
+
+
+java
+
+@Entity
+
+public class CategoryEntity {
+
+
+
+@Id
+
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+private Long id;
+
+
+
+private String name;
+
+
+
+@OneToMany
+
+private List<ProductEntity> products;
+
+}
+
+ProductEntity.java
+
+
+
+java
+
+@Entity
+
+public class ProductEntity {
+
+
+
+@Id
+
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+private Long id;
+
+
+
+private String name;
+
+
+
+@ManyToOne
+
+@JoinColumn(name = "category_id")
+
+private CategoryEntity category;
+
+}
+
+Database tables
+
+Category table
+
+id
+
+name
+
+1
+
+Electronics
+
+Product table
+
+id
+
+name
+
+category_id
+
+101
+
+Laptop
+
+1
+
+102
+
+Mobile
+
+1
+
+Additional join table (typically created by Hibernate)
+
+category_id
+
+products_id
+
+1
+
+101
+
+1
+
+102
+
+Here, JPA treats the two sides as separate relationship mappings.
+
+2. With mappedBy = "category"
+
+CategoryEntity.java
+
+
+
+java
+
+@Entity
+
+public class CategoryEntity {
+
+
+
+@Id
+
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+private Long id;
+
+
+
+private String name;
+
+
+
+@OneToMany(mappedBy = "category")
+
+private List<ProductEntity> products;
+
+}
+
+ProductEntity.java
+
+
+
+java
+
+@Entity
+
+public class ProductEntity {
+
+
+
+@Id
+
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+private Long id;
+
+
+
+private String name;
+
+
+
+@ManyToOne
+
+@JoinColumn(name = "category_id")
+
+private CategoryEntity category;
+
+}
+
+Database tables
+
+Category table
+
+id
+
+name
+
+1
+
+Electronics
+
+Product table
+
+id
+
+name
+
+category_id
+
+101
+
+Laptop
+
+1
+
+102
+
+Mobile
+
+1
+
+Now, there is no additional join table because mappedBy = "category" tells Hibernate to use the existing relationship defined by ProductEntity.category.
+
+Remember: mappedBy takes the Java field name from the owning entity, not the database column name.
+
+write this above in correct way so ican just copy an dpaste in enclipse
+
+dont remove any ocntent
+
+1. Without mappedBy
+CategoryEntity.java
+Java
+@Entity
+public class CategoryEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany
+    private List<ProductEntity> products;
+}
+ProductEntity.java
+Java
+@Entity
+public class ProductEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+}
+Database Tables
+Category table
+
+id	name
+1	Electronics
+Product table
+
+id	name	category_id
+101	Laptop	1
+102	Mobile	1
+Additional join table (typically created by Hibernate)
+
+category_id	products_id
+1	101
+1	102
+Here, JPA treats the two sides as separate relationship mappings.
+
+2. With mappedBy = "category"
+CategoryEntity.java
+Java
+@Entity
+public class CategoryEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<ProductEntity> products;
+}
+ProductEntity.java
+Java
+@Entity
+public class ProductEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+}
+Database Tables
+Category table
+
+id	name
+1	Electronics
+Product table
+
+id	name	category_id
+101	Laptop	1
+102	Mobile	1
+Now, there is no additional join table because mappedBy = "category" tells Hibernate to use the existing relationship defined by ProductEntity.category.
+
+Remember: mappedBy takes the Java field name from the owning entity, not the database column name.

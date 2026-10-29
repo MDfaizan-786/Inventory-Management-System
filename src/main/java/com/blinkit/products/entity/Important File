@@ -1,0 +1,10 @@
+Attribute	Simple English Meaning
+
+name		Sets the database column name.
+nullable	Decides whether the column can store NULL.
+unique		Prevents duplicate values in that column.
+length		Sets the maximum length of a string column.
+precision	Sets the total number of digits in a decimal number.
+scale		Sets the number of digits after the decimal point.
+insertable	Decides whether the column is included in an SQL INSERT.
+updatable	Decides whether the column is included in an SQL UPDATE.

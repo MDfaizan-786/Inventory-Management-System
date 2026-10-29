@@ -1,0 +1,62 @@
+1. What is validation?
+Validation means checking whether input data is correct before processing or saving it.
+
+| Annotation		 |		 Purpose				 | 		Example	 	|
+| 	--- 			 | 		  ---    				 |  	  --- 		|
+| `@NotNull` 			| Value cannot be null		 | `Integer stock` |
+| `@NotBlank`		 | String cannot be null, empty, or whitespace | `String name` |
+| `@NotEmpty`		 | String or collection cannot be empty | `List<String>` |
+| `@Min(0)` 		| Number must be at least 0 		| `Integer stock` |
+| `@Max(100)`		 | Number must not exceed 100 			| `Integer discount` |
+| `@Positive`		 | Number must be greater than 0 			| `BigDecimal price` |
+| `@Size(max = 100)` | Restricts string or collection size		 | `String name` |
+| `@Email` 			| Checks email format					 | `String email`|
+| `@Pattern`		 | Checks a regular expression 			| Phone or code format |
+
+/*
+ * 3. Common Validation Annotations
+ *
+ * @NotNull
+ * - The value must not be null.
+ *
+ * @NotEmpty
+ * - The value must not be null or empty.
+ * - Applies to strings, collections, maps, and arrays.
+ *
+ * @NotBlank
+ * - The string must contain at least one non-whitespace character.
+ *
+ * @Size(min = 3, max = 50)
+ * - The size must be between 3 and 50.
+ * - Applies to strings, collections, maps, and arrays.
+ *
+ * @Min(1)
+ * - The numeric value must be at least 1.
+ *
+ * @Max(100)
+ * - The numeric value must not exceed 100.
+ *
+ * @Email
+ * - The string must satisfy the validator's email-format rules.
+ */
+
+
+/*
+ * 4. Common JPA Column Options
+ *
+ * @Column(nullable = false)
+ * - Specifies that the database column should not allow NULL values
+ *   when the database schema is generated.
+ *
+ * @Column(unique = true)
+ * - Specifies a uniqueness constraint for the column
+ *   when the database schema is generated.
+ *
+ * @Column(length = 100)
+ * - Specifies the column length for applicable string columns
+ *   when the database schema is generated.
+ *
+ * @JoinColumn(nullable = false)
+ * - Specifies that the relationship's foreign-key column
+ *   should not allow NULL values when the schema is generated.
+ */

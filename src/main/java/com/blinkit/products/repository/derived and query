@@ -1,0 +1,64 @@
+ Derived query -> A derived query is a query that Spring Data JPA automatically generates from the method name.
+ @query -> @Query is an annotation in Spring Data JPA used to define custom JPQL or native SQL queries directly inside a repository interface.
+
+ Spring Data JPA queries ko 2 tarike se handle karta hai: Derived Query aur @Query.
+
+
+List<ProductsEntity> findByName(String name);
+
+
+Tum method ka naam likhte ho, aur Spring Data JPA us naam ko parse karke automatically query banata hai.
+
+findBy → data search karna
+
+Name → entity ki name property
+
+String name → search karne ke liye value
+
+Agar tum "Laptop" pass karte ho, toh conceptually SQL aisi hogi:
+You write the method name, and Spring Data JPA parses it to automatically generate the database query.
+
+
+
+sql
+SELECT * FROM products WHERE name = 'Laptop';
+Behind the scenes: Spring Data JPA repository create hote waqt method name ko samajhta hai aur query generate karta hai. Tumhe manually SQL likhne ki zaroorat nahi hoti.
+
+2. @Query ko kaise handle karta hai?
+
+java
+@Query("SELECT p FROM ProductsEntity p WHERE p.price > 1000")
+List<ProductsEntity> findExpensiveProducts();
+Ismein tum khud query likhte ho.
+
+@Query Spring Data JPA ko batata hai ki is method ke liye custom query use karni hai.
+
+ProductsEntity entity class hai.
+
+p us entity ka alias hai.
+
+p.price > 1000 condition hai.
+
+Behind the scenes:
+
+Spring Data JPA reads the query defined in @Query.
+
+A JPA provider such as Hibernate translates JPQL into SQL.
+
+The SQL query executes against the database.
+
+The results are mapped into ProductsEntity objects and returned.
+
+
+
+Derived Query                                             @Query
+
+Query is generated from the method name.    You define the query yourself.
+Example: findByName()                     Example: @Query("SELECT...")
+Useful for simple queries.             Useful for custom or complex queries.
+
+
+
+
+
+

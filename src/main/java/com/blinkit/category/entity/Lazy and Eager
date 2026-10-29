@@ -1,0 +1,59 @@
+/*
+ * Lazy Loading (FetchType.LAZY) vs Eager Loading (FetchType.EAGER)
+ *
+ * 1. Lazy Loading:
+ *    - Category data is fetched only when it is accessed.
+ *    - It helps avoid fetching unnecessary data.
+ *    - It can improve initial query performance.
+ *
+ * 2. Eager Loading:
+ *    - Category data is fetched eagerly when the Product entity is loaded.
+ *    - It fetches data even if the category is not accessed.
+ *    - It may cause unnecessary database queries or performance overhead.
+ */
+ 
+
+1. Lazy Loading (FetchType.LAZY)
+Interview Definition: Lazy loading is a fetching strategy in JPA where related 
+entity data is loaded from the database only when it is accessed, rather than 
+being loaded eagerly with the parent entity.
+
+2. Eager Loading (FetchType.EAGER)
+Interview Definition: Eager loading is a fetching strategy in JPA
+ where related entity data is required to be loaded eagerly when the 
+ parent entity is loaded, even if the related data is not explicitly accessed.
+
+Easy way to remember:
+
+LAZY → Load when needed. Simple definition: Lazy loading means related data is loaded from the database only when we need it.
+
+// Department data is loaded
+System.out.println(dept.getName());
+
+// Employee data is fetched when accessed
+System.out.println(dept.getEmployees());
+
+EAGER → Load eagerly.Eager loading means related data is loaded along with the parent entity, even if we don't use it immediately.
+// Department data is loaded
+System.out.println(dept.getName());
+
+// Employee data is also fetched eagerly
+System.out.println(dept.getEmployees());
+Simple explanation
+When we fetch the department, JPA also fetches its related employee data eagerly.
+
+Even if we don't call dept.getEmployees(), the employees are still required to be fetched.
+
+When we call dept.getEmployees(), the employee data is already fetched.
+
+Lazy vs Eager
+LAZY: Load employee data when needed.
+
+EAGER: Fetch employee data eagerly along with the department.
+
+------------------------------------------------
+
+Lazy loading means the associated data is generally loaded when it is accessed, rather than being loaded immediately with the owning entity.
+
+Eager fetching tells JPA that associated data should be fetched eagerly.
+ 
